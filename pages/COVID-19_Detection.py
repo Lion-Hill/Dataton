@@ -5,8 +5,9 @@ import librosa
 import pickle
 import warnings
 import os
+from matplotlib import pyplot as plt
 
-warnings.filterwarnings(action='ignore')
+st.set_option('deprecation.showPyplotGlobalUse', False)
 
 st.set_page_config(layout="wide")
 
@@ -25,6 +26,7 @@ symptoms = {
 
 def get_mfcc_feature():
     y, sr = librosa.load(audio_file, sr=CFG['SR'])
+    wav_plot(y, sr)
     mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=CFG['N_MFCC'])
     y_feature = []
     for e in mfcc:
@@ -48,7 +50,15 @@ def data_preprocessing():
 
     return info_df, sex_df
 
-# 모델 load하는 함수
+
+def wav_plot(y, sr):
+    time = np.linspace(0, len(y)/sr, len(y))
+    fig, ax = plt.subplots()
+    ax.plot(time, y, color='g')
+    ax.set_xlabel('Time')
+    ax.set_ylabel('Voice')
+    plt.title('WAV Plot')
+    st.pyplot()
 
 
 def get_model():
@@ -61,7 +71,6 @@ def judge_covid():
     info_df, sex_df = data_preprocessing()
     mid_df = pd.merge(info_df, mfcc_df, left_index=True, right_index=True)
     result_df = pd.merge(mid_df, sex_df, left_index=True, right_index=True)
-    # wav_plot(y, sr)
     model = get_model()
     sample_proba = 0.14
     sample_data = np.array(result_df).reshape(1, -1)
@@ -73,6 +82,7 @@ def judge_covid():
 
 audio_file = st.file_uploader("Upload Audio file", type=[
                               "wav"])
+st.audio(audio_file)
 age_info = st.number_input(
     'Input your age', min_value=1, max_value=100, step=1)
 sex_info = st.selectbox('성별을 골라주세요', ('남성', '여성', '기타'))
@@ -82,7 +92,7 @@ fever_or_muscle_pain = st.selectbox(
     '현재 발열증상이나 근육통 증상이 있으신가요?', ('있다', '없다'))
 
 
-if (audio_file is not None):
+if audio_file:
     if st.button('Submit audio file'):
         sample_return = judge_covid()
 
