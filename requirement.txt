@@ -1,13 +1,11 @@
 pandas
 numpy
 streamlit
-plotly
 seaborn
 matplotlib==3.3.2
 koreanize_matplotlib
 scikit-learn
 librosa
-opencv-python-headless
 tensorflow
 pickle
 warning
