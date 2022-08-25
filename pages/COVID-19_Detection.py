@@ -4,6 +4,8 @@ import pandas as pd
 import librosa
 import pickle
 import warnings
+import os
+from pydub import AudioSegment
 
 warnings.filterwarnings(action='ignore')
 
@@ -24,6 +26,19 @@ symptoms = {
 
 def get_mfcc_feature():
     st.write(audio_file)
+    file_name = audio_file.name.split('.')[0]
+    extension = audio_file.name.split('.')[1]
+    if extension == 'mp4':
+        st.write('mp4')
+        st.write(AudioSegment.from_file(audio_file.name, 'mp4'))
+    elif extension == 'm4a':
+        st.write('m4a')
+    elif extension == 'mp3':
+        st.write('mp3')
+    elif extension == 'wav':
+        st.write('wav')
+    else:
+        st.write('파일 형식에 맞는 파일을 올려주세요!!')
 
     y, sr = librosa.load(audio_file, sr=CFG['SR'])
     mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=CFG['N_MFCC'])
