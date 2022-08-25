@@ -3,7 +3,7 @@ numpy
 streamlit
 plotly
 seaborn
-matplotlib
+matplotlib==3.3.2
 koreanize_matplotlib
 scikit-learn
 librosa
