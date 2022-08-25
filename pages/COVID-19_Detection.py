@@ -4,6 +4,7 @@ import pandas as pd
 import librosa
 import pickle
 import warnings
+import os
 
 warnings.filterwarnings(action='ignore')
 
@@ -71,7 +72,7 @@ def judge_covid():
 
 
 audio_file = st.file_uploader("Upload Audio file", type=[
-                              "wav", "mp3", "mp4", "m4a"])
+                              "wav"])
 age_info = st.number_input(
     'Input your age', min_value=1, max_value=100, step=1)
 sex_info = st.selectbox('성별을 골라주세요', ('남성', '여성', '기타'))
