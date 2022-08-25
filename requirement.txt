@@ -10,3 +10,4 @@ librosa
 opencv-python-headless
 tensorflow
 pickle
+warning
