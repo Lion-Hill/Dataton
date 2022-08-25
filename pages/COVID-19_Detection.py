@@ -30,7 +30,7 @@ def get_mfcc_feature():
     extension = audio_file.name.split('.')[1]
     if extension == 'mp4':
         st.write('mp4')
-        audio_file = AudioSegment.from_file(audio_file.name, 'mp4').export(
+        temp = AudioSegment.from_file(audio_file.name, 'mp4').export(
             os.path(audio_file.name+".wav"), format="wav")
     elif extension == 'm4a':
         st.write('m4a')
