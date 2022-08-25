@@ -1,0 +1,9 @@
+pandas
+numpy
+streamlit
+seaborn
+matplotlib==3.3.2
+koreanize_matplotlib
+scikit-learn
+librosa
+tensorflow
