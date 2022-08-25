@@ -51,7 +51,7 @@ def data_preprocessing():
 
 
 def get_model():
-    model = pickle.load(open('model\mlp_second.sav', 'rb'))
+    model = pickle.load(open('model/mlp_second.sav', 'rb'))
     return model
 
 
