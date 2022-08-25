@@ -7,4 +7,3 @@ koreanize_matplotlib
 scikit-learn
 librosa
 tensorflow
-warning
