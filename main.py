@@ -1,48 +1,60 @@
 import streamlit as st
+import pandas as pd
+import numpy as np
+from html_module import line_break, section, callout, title
+from PIL import Image
 
-st.set_page_config(layout="wide")
-
-st.title('COVID-19 Detection Using Coughing')
-
-
-def line_break():
-    return st.markdown("<br/>", unsafe_allow_html=True)
-
-# st.sidebar.success("Select a page above.") 페이지 골라주세요 부분
-
-
-st.subheader("Nice to meet You XD")
-
-
-selected_item = st.radio("여러분이 가진 고민은 무엇인가요?", (
-    "패션에 관심은 많은데 스타일링이 어려워요",
-    "바쁜 아침에 고민하지 않고 빨리 준비하고 싶어요",
-    "집에 사놓고 어떻게 입어야 할 지 모르겠는 옷들이 많아요"
-)
+# config
+st.set_page_config(
+    page_title="COVID-19 Coughing Detector",
+    page_icon="🤒",
+    initial_sidebar_state="expanded",
+    layout="wide",
+    menu_items={
+        'Get Help': 'https://www.extremelycoolapp.com/help',
+        'Report a bug': "https://www.extremelycoolapp.com/bug",
+        'About': "# This is a header. This is an *extremely* cool app!"
+    }
 )
 
-if selected_item == "패션에 관심은 많은데 스타일링이 어려워요":
-    st.write("**마스매가 예쁜 코디 사진 추천으로 도와줄게요!**")
-elif selected_item == "바쁜 아침에 고민하지 않고 빨리 준비하고 싶어요":
-    st.write("**마스매와 함께라면 빠른 출근 준비 완료!**")
-elif selected_item == "집에 사놓고 어떻게 입어야 할 지 모르겠는 옷들이 많아요":
-    st.write("**마스매로 옷장 속 장롱템의 재발견까지!**")
+# title
+title('COVID-19 Coughing Detector')
+
+# 코로나 증상
+section('코로나19 주요 증상 안내')
+
+line_break()
+
+image = Image.open('images/코로나증상.png')
+st.image(image,)
+
+line_break()
+
+st.markdown('여러분이 앓고 있는 증상은 무엇인가요?')
+agree1 = st.checkbox('발열')
+agree2 = st.checkbox('기침')
+agree3 = st.checkbox('몸살')
+agree4 = st.checkbox('인후통')
+
+if agree1 or agree2 or agree3 or agree4:
+    st.markdown('코로나19 증상이 있군요! 코로나 검사가 필요할 것 같아요.')
 
 line_break()
 line_break()
-st.markdown(
-    """
-### What is My Style Manager?
-    마이스타일매니저에서는 직접 촬영한 상품 이미지(상의, 하의, 신발, 모자 등)를 올리면    
-    해당 상품에 어울리는 코디를 자동으로 추천해줍니다. 매일 아침 등교, 출근 준비 시간에      
-    마스매를 통해 고민없는 빠르고 예쁜 스타일링 추천을 경험해보세요!
-"""
-)
+
+callout(['현재 집에 진단키트가 없으신가요?',
+         '',
+        'COVID-19의 두드러진 증상은 기침과 호흡 곤란을 포함합니다.',
+         'AI 기술을 활용하여 기침 소리로부터 COVID-19에 대한 유용한 통찰력을 얻을 수 있습니다.',
+         '기침 소리로부터 COVID-19를 검출하는 새로운 진단 도구를 사용해보세요!'])
 
 line_break()
 line_break()
-st.subheader("How To Use?")
+line_break()
 
+# step
+section('진단 도구 사용 방법')
+line_break()
 
 col1, col2, col3 = st.columns(3)
 
@@ -50,19 +62,27 @@ with col1:
     st.markdown(
         """
         #### Step1
+        기침 소리로부터 COVID-19를 검출하는 새로운 진단 도구를 사용해보아요.
         """
     )
+    st.image("images/step1.jpg")
 
 with col2:
     st.markdown(
         """
         #### Step2
+        기침하는 소리를 녹음합니다.
+        녹음 파일은 확장자명은 **WAV**이어야 합니다!
+        다른 확장자더라도 자동 변환됩니다.
         """
     )
+    st.image("images/step2.jpg")
 
 with col3:
     st.markdown(
         """
         #### Step3
+        COVID-19 Detection 페이지에서 진단 결과를 확인하세요!
         """
     )
+    st.image("images/step3.jpg")

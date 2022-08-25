@@ -23,6 +23,8 @@ symptoms = {
 
 
 def get_mfcc_feature():
+    st.write(audio_file)
+
     y, sr = librosa.load(audio_file, sr=CFG['SR'])
     mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=CFG['N_MFCC'])
     y_feature = []
