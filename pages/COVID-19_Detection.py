@@ -1,7 +1,6 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-from matplotlib import pyplot as plt
 import librosa
 import pickle
 import warnings
@@ -21,18 +20,6 @@ symptoms = {
     '있다': 1,
     '없다': 0
 }
-
-# wav 시각화 함수
-
-
-def wav_plot(y, sr):
-    time = np.linspace(0, len(y)/sr, len(y))
-    fig, ax = plt.subplots(figsize=(5, 5))
-    ax.plot(time, y, color='g')
-    ax.set_xlabel('Time')
-    ax.set_ylabel('Voice')
-    plt.title('WAV Plot')
-    st.pyplot(fig)
 
 
 def get_mfcc_feature():
@@ -83,7 +70,8 @@ def judge_covid():
     return sample_return
 
 
-audio_file = st.file_uploader("Upload Audio file", type=["wav", "mp3", "mp4","m4a"])
+audio_file = st.file_uploader("Upload Audio file", type=[
+                              "wav", "mp3", "mp4", "m4a"])
 age_info = st.number_input(
     'Input your age', min_value=1, max_value=100, step=1)
 sex_info = st.selectbox('성별을 골라주세요', ('남성', '여성', '기타'))
