@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(layout="wide")
 
-st.title('COVID-19 Detection Using Coughing')
+st.title('COVID-19 Coughing Detector')
 
 
 def line_break():
@@ -11,7 +11,10 @@ def line_break():
 # st.sidebar.success("Select a page above.") 페이지 골라주세요 부분
 
 
-st.subheader("Nice to meet You XD")
+line_break()
+
+
+st.subheader("코로나19 주요증상 안내")
 
 
 selected_item = st.radio("여러분이 가진 고민은 무엇인가요?", (
@@ -29,7 +32,7 @@ elif selected_item == "집에 사놓고 어떻게 입어야 할 지 모르겠는
     st.write("**마스매로 옷장 속 장롱템의 재발견까지!**")
 
 line_break()
-line_break()
+
 st.markdown(
     """
 ### What is My Style Manager?
@@ -40,7 +43,7 @@ st.markdown(
 )
 
 line_break()
-line_break()
+
 st.subheader("How To Use?")
 
 
